@@ -1,0 +1,45 @@
+import discord
+import time
+import asyncio
+from discord.ext import commands 
+
+TOKEN = "bot token"
+
+
+bot = commands.Bot(command_prefix="!")
+#put bot code in between this and token
+
+@bot.event
+async def on_ready():
+    print(f'{bot.user} succesfully logged in!')
+
+@bot.event
+async def on_message(message):
+    
+    if (message.channel.id == 878700514987110480): #channelid
+        file = await message.attachments[0].to_file()
+        file.filename = 'image.png'
+        file.filename = 'image.gif'
+        file.filename = 'image.jpeg'
+        file.filename = 'image.jpg'
+        embed = discord.Embed()
+        embed.set_image(url='attachment://image.png')
+        embed.set_image(url='attachment://image.gif')
+        embed.set_image(url='attachment://image.jpeg')
+        embed.set_image(url='attachment://image.jpg')
+        print("started")
+        await asyncio.sleep(4) #time in sec for 4
+        await message.delete()
+
+@bot.event
+async def on_message(message):
+    if (message.channel.id == 878700514987110480): #channelid
+        if message.content.startswith ('https://cdn.discordapp.com/attachments/'): 
+            embed = discord.Embed()
+            embed.set_image(url='attachment://image.png')
+            print("started")
+            await asyncio.sleep(4) #time in sec for 4
+            await message.delete()
+
+
+bot.run(TOKEN)
